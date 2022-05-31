@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/gin-contrib/pprof"
+	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"github.com/nicolerobin/todo/api"
@@ -17,7 +18,7 @@ func NewRouter() *gin.Engine {
 	store := cookie.NewStore([]byte("cookie-secret"))
 	docs.SwaggerInfo.BasePath = "/api/v1"
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.Use(sessions.sessions("mysession", store))
+	r.Use(sessions.Sessions("mysession", store))
 	r.Use(middleware.Cors(), gin.Recovery())
 	ug := r.Group("api/v1")
 	{

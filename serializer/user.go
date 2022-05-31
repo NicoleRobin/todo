@@ -13,8 +13,8 @@ type User struct {
 
 func BuildUser(user model.User) User {
 	return User{
-		Id:       user.Id,
+		Id:       user.ID,
 		UserName: user.UserName,
-		CreateAt: user.CreateAt.Unix(),
+		CreateAt: user.CreatedAt.Unix(),
 	}
 }

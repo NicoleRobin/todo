@@ -26,6 +26,189 @@
                     }
                 }
             }
+        },
+        "/user/login": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "USER"
+                ],
+                "summary": "用户登陆",
+                "parameters": [
+                    {
+                        "description": "user, password",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/service.UserService"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"status\":200, \"data\":{}, \"msg\":\"ok\"}",
+                        "schema": {
+                            "$ref": "#/definitions/serializer.ResponseTask"
+                        }
+                    },
+                    "500": {
+                        "description": "{\"status\": 500, \"data\":{}, \"msg\":{}, \"error\":\"error\"}",
+                        "schema": {
+                            "$ref": "#/definitions/serializer.ResponseTask"
+                        }
+                    }
+                }
+            }
+        },
+        "/user/register": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "USER"
+                ],
+                "summary": "用户注册",
+                "parameters": [
+                    {
+                        "description": "user, password",
+                        "name": "data",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/service.UserService"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "{\"status\":200, \"data\":{}, \"msg\":\"ok\"}",
+                        "schema": {
+                            "$ref": "#/definitions/serializer.ResponseUser"
+                        }
+                    },
+                    "500": {
+                        "description": "{\"status\": 500, \"data\":{}, \"msg\":{}, \"error\":\"error\"}",
+                        "schema": {
+                            "$ref": "#/definitions/serializer.ResponseUser"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "serializer.ResponseTask": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/serializer.Task"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "serializer.ResponseUser": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/serializer.User"
+                },
+                "error": {
+                    "type": "string"
+                },
+                "msg": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "integer"
+                }
+            }
+        },
+        "serializer.Task": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "create_at": {
+                    "type": "integer"
+                },
+                "end_time": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "start_time": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "integer",
+                    "example": 0
+                },
+                "title": {
+                    "type": "string"
+                },
+                "view": {
+                    "type": "integer",
+                    "example": 32
+                }
+            }
+        },
+        "serializer.User": {
+            "type": "object",
+            "properties": {
+                "create_at": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "user_name": {
+                    "type": "string",
+                    "example": "FanOne"
+                }
+            }
+        },
+        "service.UserService": {
+            "type": "object",
+            "required": [
+                "password",
+                "user_name"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string",
+                    "maxLength": 16,
+                    "minLength": 5,
+                    "example": "FanOne666"
+                },
+                "user_name": {
+                    "type": "string",
+                    "maxLength": 15,
+                    "minLength": 3
+                }
+            }
         }
     }
 }

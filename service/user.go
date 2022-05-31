@@ -1,17 +1,21 @@
 package service
 
 import (
+	"fmt"
+
+	"github.com/nicolerobin/log"
 	"github.com/nicolerobin/todo/model"
 	"github.com/nicolerobin/todo/pkg/e"
 	"github.com/nicolerobin/todo/serializer"
 )
 
 type UserService struct {
-	UserName string `from:"user_name" json:"user_name" binding:"required,min=3,max=15" exmaple:"FanOne"`
-	Password string `from:"password" json:"password" binding:"required,min=5,max=16" example:"FanOne666"`
+	UserName string `form:"user_name" json:"user_name" binding:"required,min=3,max=15" exmaple:"FanOne"`
+	Password string `form:"password" json:"password" binding:"required,min=5,max=16" example:"FanOne666"`
 }
 
 func (us *UserService) Register() *serializer.Response {
+	log.Debug(fmt.Sprint(us))
 	code := e.SUCCESS
 	var user model.User
 	var count int

@@ -1,6 +1,7 @@
 package model
 
 import (
+	"log"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -11,6 +12,7 @@ import (
 var DB *gorm.DB
 
 func Database(connStr string) {
+	log.Print(connStr)
 	db, err := gorm.Open("mysql", connStr)
 	db.LogMode(true)
 	if err != nil {

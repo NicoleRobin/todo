@@ -12,7 +12,7 @@ import (
 // @Produce json
 // @Accept json
 // @Param data body service.UserService true "user, password"
-// @Success 200 {object} seiralizer.ResponseUser "{"status":200, "data":{}, "msg":"ok"}"
+// @Success 200 {object} serializer.ResponseUser "{"status":200, "data":{}, "msg":"ok"}"
 // @Failure 500 {object} serializer.ResponseUser "{"status": 500, "data":{}, "msg":{}, "error":"error"}"
 // @Router /user/register [post]
 func UserRegister(c *gin.Context) {
@@ -31,8 +31,8 @@ func UserRegister(c *gin.Context) {
 // @Produce json
 // @Accept json
 // @Param data body service.UserService true "user, password"
-// @Success 200 {object} seiralizer.ResponseUser "{"status":200, "data":{}, "msg":"ok"}"
-// @Failure 500 {object} serializer.ResponseUser "{"status": 500, "data":{}, "msg":{}, "error":"error"}"
+// @Success 200 {object} serializer.ResponseTask "{"status":200, "data":{}, "msg":"ok"}"
+// @Failure 500 {object} serializer.ResponseTask "{"status": 500, "data":{}, "msg":{}, "error":"error"}"
 // @Router /user/login [post]
 func UserLogin(c *gin.Context) {
 

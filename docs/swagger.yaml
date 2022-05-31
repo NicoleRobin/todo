@@ -1,3 +1,74 @@
+definitions:
+  serializer.ResponseTask:
+    properties:
+      data:
+        $ref: '#/definitions/serializer.Task'
+      error:
+        type: string
+      msg:
+        type: string
+      status:
+        type: integer
+    type: object
+  serializer.ResponseUser:
+    properties:
+      data:
+        $ref: '#/definitions/serializer.User'
+      error:
+        type: string
+      msg:
+        type: string
+      status:
+        type: integer
+    type: object
+  serializer.Task:
+    properties:
+      content:
+        type: string
+      create_at:
+        type: integer
+      end_time:
+        type: integer
+      id:
+        type: integer
+      start_time:
+        type: integer
+      status:
+        example: 0
+        type: integer
+      title:
+        type: string
+      view:
+        example: 32
+        type: integer
+    type: object
+  serializer.User:
+    properties:
+      create_at:
+        type: integer
+      id:
+        type: integer
+      status:
+        type: string
+      user_name:
+        example: FanOne
+        type: string
+    type: object
+  service.UserService:
+    properties:
+      password:
+        example: FanOne666
+        maxLength: 16
+        minLength: 5
+        type: string
+      user_name:
+        maxLength: 15
+        minLength: 3
+        type: string
+    required:
+    - password
+    - user_name
+    type: object
 info:
   contact: {}
 paths:
@@ -16,4 +87,54 @@ paths:
       summary: ping example
       tags:
       - exmaple
+  /user/login:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: user, password
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/service.UserService'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"status":200, "data":{}, "msg":"ok"}'
+          schema:
+            $ref: '#/definitions/serializer.ResponseTask'
+        "500":
+          description: '{"status": 500, "data":{}, "msg":{}, "error":"error"}'
+          schema:
+            $ref: '#/definitions/serializer.ResponseTask'
+      summary: 用户登陆
+      tags:
+      - USER
+  /user/register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: user, password
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/service.UserService'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"status":200, "data":{}, "msg":"ok"}'
+          schema:
+            $ref: '#/definitions/serializer.ResponseUser'
+        "500":
+          description: '{"status": 500, "data":{}, "msg":{}, "error":"error"}'
+          schema:
+            $ref: '#/definitions/serializer.ResponseUser'
+      summary: 用户注册
+      tags:
+      - USER
 swagger: "2.0"
