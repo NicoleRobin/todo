@@ -14,12 +14,18 @@ import (
 
 func NewRouter() *gin.Engine {
 	r := gin.Default()
+
+	// pprof
 	pprof.Register(r)
+
+	// cookie based session
 	store := cookie.NewStore([]byte("cookie-secret"))
 	docs.SwaggerInfo.BasePath = "/api/v1"
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Use(sessions.Sessions("mysession", store))
 	r.Use(middleware.Cors(), gin.Recovery())
+
+	// swagger
+	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	ug := r.Group("api/v1")
 	{
 		// 用户操作
