@@ -28,3 +28,6 @@ curl -X POST -d '{"user_name":"robin_zhang", "password": "123456"}' localhost:60
 但是奇怪的是，这里发送的参数也是按照接口定义的UserService中定义来传递的，为什么一直失败呢？
 
 最终排查出来原因是curl命令没有指定`Content-Type`
+
+## 2、jwt是怎么使用的？
+在登陆的时候登陆成功后在body中返回token，由后续请求将token做为header提交

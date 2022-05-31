@@ -35,15 +35,14 @@ func NewRouter() *gin.Engine {
 		authed := ug.Group("/")
 		authed.Use(middleware.JWT())
 		{
-			/*
-				// 任务操作
-				authed.GET("tasks", api.ListTasks)
-				authed.POST("task", api.CreateTask)
-				authed.GET("task:id", api.ShowTask)
-				authed.DELETE("task/:id", api.DeleteTask)
-				authed.PUT("task/:id", api.UpdateTask)
-				authed.POST("search", api.SearchTasks)
-			*/
+
+			// 任务操作
+			authed.GET("tasks", api.ListTasks)
+			// authed.POST("task", api.CreateTask)
+			// authed.GET("task:id", api.ShowTask)
+			// authed.DELETE("task/:id", api.DeleteTask)
+			// authed.PUT("task/:id", api.UpdateTask)
+			// authed.POST("search", api.SearchTasks)
 		}
 	}
 	return r

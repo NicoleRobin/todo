@@ -50,3 +50,23 @@ func (us *UserService) Register() *serializer.Response {
 		Msg:    e.GetMsg(code),
 	}
 }
+
+func (us *UserService) Login() *serializer.Response {
+	var user model.User
+	code := e.SUCCESS
+	if err := model.DB.Where("user_name=?", us.UserName).First(&user).Error; err != nil {
+	}
+
+	if user.CheckPassword(us.Password) == false {
+	}
+
+	token, err := util.GenerateToken(user.ID, us.UserName, 0)
+	if err != nil {
+	}
+
+	return serializer.Response{
+		Status: code,
+		Data:   serializer.TokenData{User: serializer.BuildUser(user), Token: token},
+		Msg:    e.GetMsg(code),
+	}
+}
