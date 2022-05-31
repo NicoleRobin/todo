@@ -10,5 +10,6 @@ import (
 func main() {
 	conf.LoadConf()
 	r := routes.NewRouter()
+	r.GET("/hello", api.Hello)
 	_ = r.Run(conf.Config.Web.Address)
 }
